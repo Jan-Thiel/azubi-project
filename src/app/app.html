@@ -2,12 +2,11 @@
 
 
 <main class="main">
-
-     <vehicle type={{ vehicles[0].type }} brand={{ vehicles[0].brand }} model={{ vehicles[0].model }} pricePerDay={{ vehicles[0].pricePerDay }}/>
-
+     <nav>
+          <a href="/">Vehicle List</a>
+          |
+          <a href="/cart">Cart</a>
+     </nav>
+     <router-outlet />
 </main>
 
-
-
-
-<router-outlet />
