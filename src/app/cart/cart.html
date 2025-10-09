@@ -1,4 +1,7 @@
-     
-     <p>lul</p>
-
-
+@for (cartItem of cartItems$ | async; track $index) {
+  <div class="card">
+    <app-cart-item [item]="cartItem" [vehicleItem]="vehicles$ | async" />
+    <app-cart-item-form [cartItemId]="cartItem.id"/>
+    <app-order [id]="cartItem.id"/>
+  </div>
+}

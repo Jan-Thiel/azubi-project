@@ -1,0 +1,17 @@
+<form (ngSubmit)="order()">
+  <label for="address">
+    Address:
+    <input id="address" [(ngModel)]="address" type="text" name="address" />
+  </label>
+  <label for="billingAddress">
+    Billing Address:
+    <input id="billingAddress" [(ngModel)]="billingAddress" type="text" name="billingAddress" />
+  </label>
+  <label for="date">
+    Billing Address:
+    <input id="date" [(ngModel)]="date" type="date" name="date" />
+  </label>
+  <label for="time">
+    <input id="time" value="Submit" type="submit" />
+  </label>
+</form>

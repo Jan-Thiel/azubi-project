@@ -1,0 +1,7 @@
+div.cart-item-container {
+  display: flex;
+  justify-content: center;
+}
+input {
+  margin: 5px;
+}
