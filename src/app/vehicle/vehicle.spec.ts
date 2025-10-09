@@ -1,22 +1,21 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { VehicleComponent } from './vehicle';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
+import { VehicleComponent } from './vehicle'
 
 describe('Vehicle', () => {
-  let component: VehicleComponent;
-  let fixture: ComponentFixture<VehicleComponent>;
+  let component: VehicleComponent
+  let fixture: ComponentFixture<VehicleComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [VehicleComponent]
-    })
-    .compileComponents();
+      imports: [VehicleComponent],
+    }).compileComponents()
 
-    fixture = TestBed.createComponent(VehicleComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(VehicleComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

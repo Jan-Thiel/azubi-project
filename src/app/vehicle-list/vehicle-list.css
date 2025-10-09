@@ -1,9 +1,9 @@
-.card{
-    max-width: 800px;
-    margin: 60px auto;
-    padding: 40px 30px;
-    border-radius: 12px;
-    background: linear-gradient(115deg, #e07fb4, #c17af4, #656597);
-    text-align: center;
-    color: white;
+.card {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 40px 30px;
+  border-radius: 12px;
+  background: linear-gradient(115deg, #e07fb4, #c17af4, #656597);
+  text-align: center;
+  color: white;
 }
