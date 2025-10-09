@@ -1,0 +1,41 @@
+<div class="card">
+  <h2>Sign up</h2>
+  <form (ngSubmit)="signup()">
+    <label for="email">
+      Email:
+      <input type="email" id="email" name="email" [(ngModel)]="email" />
+    </label>
+    <label for="password">
+      Password:
+      <input type="password" id="password" name="password" [(ngModel)]="password" />
+    </label>
+    <label for="firstName">
+      First Name:
+      <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" />
+    </label>
+    <label for="surname">
+      Surname:
+      <input type="text" id="surname" name="surname" [(ngModel)]="surname" />
+    </label>
+    <input
+      type="submit"
+      id="submit"
+      name="submit"
+      [disabled]="!validateEmail(email) || !validatePassword(password)"
+    />
+  </form>
+  <br />
+  <div class="error">
+    <span class="error" [hidden]="validateEmail(email)"
+      >The email you are trying to enter is of an incorrect format</span
+    >
+  </div>
+  <br />
+  <br />
+  <div class="error">
+    <span class="error" [hidden]="validatePassword(password)"
+      >Passwords must contain at least one uppercase, one lowercase, one digit and one special
+      character (?!§$%&()=-.,:;<>|*#~)</span
+    >
+  </div>
+</div>

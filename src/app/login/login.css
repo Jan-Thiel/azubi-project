@@ -1,0 +1,15 @@
+span.error {
+  color: white;
+}
+div.error {
+  background: rgba(255, 0, 0, 0.5);
+}
+.card {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 40px 30px;
+  border-radius: 12px;
+  background: linear-gradient(115deg, #e07fb4, #c17af4, #656597);
+  text-align: center;
+  color: white;
+}
