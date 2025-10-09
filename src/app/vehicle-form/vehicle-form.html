@@ -1,10 +1,9 @@
 <form (ngSubmit)="makeCartItem()">
-    <label for="time">
-        Time:
-        <input id="time" [(ngModel)]="time" type="number" name="time"/>
-    </label>
-    <label for="time" >
-        <input id="time" value="Submit" type="submit" />
-    </label>
+  <label for="time">
+    Time:
+    <input id="time" [(ngModel)]="time" type="number" name="time" />
+  </label>
+  <label for="time">
+    <input id="time" value="Submit" type="submit" [disabled]="time > 2147483647" />
+  </label>
 </form>
-
