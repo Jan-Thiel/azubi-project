@@ -3,7 +3,12 @@
     Time:
     <input id="time" [(ngModel)]="time" type="number" name="time" />
   </label>
-  <label for="time">
-    <input id="time" value="Submit" type="submit" [disabled]="time > 2147483647" />
+  <label for="quantity">
+    Quantity:
+    <input id="quantity" [(ngModel)]="quantity" type="number" name="quantity" />
+  </label>
+  <br />
+  <label for="submit">
+    <input id="submit" value="Submit" type="submit" [disabled]="time > 2147483647" />
   </label>
 </form>

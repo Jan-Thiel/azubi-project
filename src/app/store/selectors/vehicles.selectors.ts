@@ -9,6 +9,6 @@ export const selectBookCollection = createSelector(
   selectVehicles,
   selectCollectionState,
   (vehicles, collection) => {
-    return collection.map(id => vehicles.find(vehicle => vehicle.id === id)!)
+    return collection.map(id => vehicles.find(vehicle => vehicle.vehicleID === id)!)
   },
 )

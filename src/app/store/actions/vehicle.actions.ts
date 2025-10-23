@@ -21,8 +21,3 @@ export const VehiclesPageActions = createActionGroup({
     'Load Vehicles': emptyProps,
   },
 })
-
-export const vehicleRetrieveAction = createAction(
-  'Retrieved Vehicle List',
-  props<{ vehicles: ReadonlyArray<Vehicle> }>(),
-)

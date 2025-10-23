@@ -9,7 +9,6 @@ import { Observable } from 'rxjs'
 import { CommonModule } from '@angular/common'
 import { VehiclesPageActions } from '../store/actions/vehicle.actions'
 
-
 @Component({
   selector: 'app-vehicle-list',
   imports: [CommonModule, VehicleComponent, FormsModule, VehicleForm],
@@ -23,7 +22,5 @@ export class VehicleList implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(VehiclesPageActions.loadVehicles())
-
-    this.vehicles$.subscribe(console.log)
   }
 }
