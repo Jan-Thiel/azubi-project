@@ -1,0 +1,19 @@
+<div>
+  @for (order of orders$ | async; track order.id) {
+    <div class="card">
+      <h3>{{ order.brand }} {{ order.model }}</h3>
+      <p>{{ order.date }}</p>
+      <p>{{ order.time }} days</p>
+      <p>Quantity: {{ order.quantity }}</p>
+      <p>{{ order.price }}€</p>
+      <p>Address:</p>
+      <div>
+        <p>{{ order.address }}</p>
+      </div>
+      <p>Billing Address:</p>
+      <div>
+        <p>{{ order.billingAddress }}</p>
+      </div>
+    </div>
+  }
+</div>

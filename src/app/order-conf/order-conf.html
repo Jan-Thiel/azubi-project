@@ -1,13 +1,9 @@
 <div>
   <h1>Your Order:</h1>
-  price
-  {{ item?.price }}
-  quant
-  {{ item?.quantity }}
-  time
-  {{ item?.time }}
-  brand
-  {{ vehicle?.brand }}
-  model
-  {{ vehicle?.model }}
+  <div class="card">
+    <h3>{{ item?.brand }} {{ item?.model }}</h3>
+    <p>Rental time: {{ item?.time }}</p>
+    <p>Quantity: {{ item?.quantity }}</p>
+    <p>Total: {{ item?.price }}</p>
+  </div>
 </div>
