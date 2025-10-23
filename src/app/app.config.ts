@@ -15,6 +15,11 @@ import { provideEffects } from '@ngrx/effects'
 import { VehiclesEffects } from './store/effects/vehicles.effects'
 import { cartsReducer } from './store/reducers/carts.reducers'
 import { CartsEffects } from './store/effects/carts.effects'
+import { ordersReducer } from './store/reducers/orders.reducers'
+import { OrderConf } from './order-conf/order-conf'
+import { OrdersEffects } from './store/effects/orders.effects'
+import { addressReducer } from './store/reducers/address.reducers'
+import { AddressEffects } from './store/effects/address.effects'
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,9 +30,16 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideStore(),
     importProvidersFrom(
-      StoreModule.forRoot({ vehicles: vehiclesReducer, cartItems: cartsReducer }),
+      StoreModule.forRoot({
+        vehicles: vehiclesReducer,
+        cartItems: cartsReducer,
+        orders: ordersReducer,
+        addresses: addressReducer,
+      }),
     ),
     provideEffects(CartsEffects),
     provideEffects(VehiclesEffects),
+    provideEffects(OrdersEffects),
+    provideEffects(AddressEffects),
   ],
 }

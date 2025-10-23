@@ -3,7 +3,9 @@ import { Cart } from './cart/cart'
 import { VehicleList } from './vehicle-list/vehicle-list'
 import { Login } from './login/login'
 import { Signup } from './signup/signup'
-import { OrderConf } from './order-conf/order-conf';
+import { OrderConf } from './order-conf/order-conf'
+import { Orders } from './orders/orders'
+import { ProfilePage } from './profile-page/profile-page'
 
 export const routes: Routes = [
   {
@@ -27,8 +29,18 @@ export const routes: Routes = [
     component: Signup,
   },
   {
-    path: "orderConf/:id",
-    title: "Order Confirmation",
+    path: 'orderConf/:id',
+    title: 'Order Confirmation',
     component: OrderConf,
-    }
+  },
+  {
+    path: 'orders',
+    title: 'Orders',
+    component: Orders,
+  },
+  {
+    path: 'profile',
+    title: 'Profile',
+    component: ProfilePage,
+  },
 ]

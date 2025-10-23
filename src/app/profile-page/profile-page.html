@@ -1,0 +1,47 @@
+<h1>Profile</h1>
+<div class="card">
+  <span>Name: {{ (customer$ | async)?.name }} {{ (customer$ | async)?.surname }}</span>
+  <p>Email: {{ (customer$ | async)?.email }} <button>Change</button></p>
+  <p>Password: <button>Change</button></p>
+</div>
+<div class="card">
+  @for (address of addresses | async; track address.id) {
+    <p>
+      {{ address.firstName }} {{ address.name }} {{ address.street }} {{ address.houseNumber }}
+      {{ address.zip }} {{ address.city }}
+      <button
+        (click)="
+          onOpenChangePopup(
+            address.firstName,
+            address.name,
+            address.street,
+            address.houseNumber,
+            address.zip,
+            address.city,
+            address.id
+          )
+        "
+      >
+        Change</button
+      ><button (click)="deleteAddress(address.id)">Delete</button>
+    </p>
+  }
+  <button (click)="onOpenPopup()">Add Address</button>
+</div>
+
+@if (popupVisible()) {
+  <app-address-popup (close)="onClosePopup()" />
+}
+
+@if (changePopupVisible()) {
+  <app-address-change-popup
+    [firstName]="firstName"
+    [name]="name"
+    [street]="street"
+    [houseNumber]="houseNumber"
+    [city]="city"
+    [zip]="zip"
+    [id]="id"
+    (close)="onCloseChangePopup()"
+  />
+}

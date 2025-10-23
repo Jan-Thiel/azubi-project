@@ -21,6 +21,14 @@ export class CustomerService {
     })
   }
 
+  getUserData() {
+    let parameters = new HttpParams().append('id', this.cookieService.getCookie('userId', document))
+    let repl = this.http.get<Customer>('http://localhost:8080/api/customers/user', {
+      params: parameters,
+    })
+    return repl
+  }
+
   signup(email: string, password: string, firstName: string, surname: string): boolean {
     let checkParameters = new HttpParams().append('email', email)
     this.http

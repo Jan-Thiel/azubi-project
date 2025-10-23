@@ -1,0 +1,42 @@
+<div class="bkg">
+  <div class="card">
+    <div class="exit">
+      <h1 (click)="onClose()">X</h1>
+    </div>
+    <h3>New Address:</h3>
+    <form (ngSubmit)="addAddress()">
+      <label for="firstName">
+        <input
+          name="firstName"
+          id="firstName"
+          type="text"
+          [(ngModel)]="model_firstName"
+          placeholder="First Name"
+        />
+      </label>
+      <label for="name">
+        <input name="name" id="name" type="text" [(ngModel)]="model_name" placeholder="Last Name" />
+      </label>
+      <label for="street">
+        <input name="street" id="street" type="text" [(ngModel)]="model_street" placeholder="Street" />
+      </label>
+      <label for="houseNumber">
+        <input
+          name="houseNumber"
+          id="houseNumber"
+          type="text"
+          [(ngModel)]="model_houseNumber"
+          placeholder="House no."
+        />
+      </label>
+      <label for="zip">
+        <input name="zip" id="zip" type="text" [(ngModel)]="model_zip" placeholder="ZIP" />
+      </label>
+      <label for="city">
+        <input name="city" id="city" type="text" [(ngModel)]="model_city" placeholder="City" />
+      </label>
+      <br />
+      <input type="submit" value="Enter" />
+    </form>
+  </div>
+</div>
