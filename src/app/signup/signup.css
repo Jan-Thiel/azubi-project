@@ -3,13 +3,45 @@ span.error {
 }
 div.error {
   background: rgba(255, 0, 0, 0.5);
+  border-radius: 5px;
+  border-style: none;
+  box-shadow:
+    inset -1px -1px 10px rgba(108, 108, 108, 0.44),
+    inset 1px 1px 10px rgba(89, 89, 99, 0.13);
 }
 .card {
   max-width: 800px;
   margin: 60px auto;
   padding: 40px 30px;
   border-radius: 12px;
-  background: linear-gradient(115deg, #e07fb4, #c17af4, #656597);
   text-align: center;
-  color: white;
+  box-shadow:
+    inset -10px -10px 10px rgba(108, 108, 108, 0.44),
+    inset 10px 10px 10px rgba(89, 89, 99, 0.13);
+  background: var(--main-color);
+}
+button {
+  border-radius: 5px;
+  border-style: none;
+  background: white;
+  box-shadow:
+    inset -5px -5px 10px rgba(108, 108, 108, 0.44),
+    inset 5px 5px 10px rgba(89, 89, 99, 0.13);
+}
+select {
+  border-radius: 5px;
+  border-style: none;
+  box-shadow:
+    inset -5px -5px 10px rgba(108, 108, 108, 0.44),
+    inset 5px 5px 10px rgba(89, 89, 99, 0.13);
+  color: var(--accent-color);
+}
+
+input {
+  border-radius: 5px;
+  border-style: none;
+  box-shadow:
+    inset -5px -5px 10px rgba(191, 191, 191, 0.44),
+    inset 5px 5px 10px rgba(149, 149, 165, 0.13);
+  color: var(--accent-color);
 }

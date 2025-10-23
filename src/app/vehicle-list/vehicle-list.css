@@ -3,7 +3,28 @@
   margin: 60px auto;
   padding: 40px 30px;
   border-radius: 12px;
-  background: linear-gradient(115deg, #e07fb4, #c17af4, #656597);
   text-align: center;
-  color: white;
+  box-shadow:
+    inset -10px -10px 10px rgba(108, 108, 108, 0.44),
+    inset 10px 10px 10px rgba(89, 89, 99, 0.13);
+  background: var(--main-color);
+}
+.card:hover {
+  animation: hoverCard 200ms forwards;
+}
+button {
+  border-radius: 5px;
+  border-style: none;
+  background: var(--accent-color);
+}
+select {
+  border-radius: 5px;
+  border-style: none;
+  color: var(--accent-color);
+}
+
+input {
+  border-radius: 5px;
+  border-style: none;
+  color: var(--accent-color);
 }

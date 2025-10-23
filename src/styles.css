@@ -1,1 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  --main-color: #cedeff;
+  --accent-color: #ff8000;
+}
+
+body {
+  margin: 0;
+}
+body {
+  text-align: center;
+  font:
+    100% 'Abel',
+    sans-serif;
+  background-size: cover;
+  background: whitesmoke;
+}
+
+@keyframes hoverCard {
+  from {
+    box-shadow: initial;
+  }
+  to {
+    box-shadow:
+      inset 10px 10px 10px rgba(108, 108, 108, 0.44),
+      inset -10px -10px 10px rgba(89, 89, 99, 0.13);
+  }
+}
+
+@keyframes hoverBtn {
+  from {
+    border-radius: initial;
+  }
+  to {
+    border-radius: 1px;
+  }
+}
+
+a:hover {
+  color: #ff8000;
+}
+
+a {
+  color: black;
+}
