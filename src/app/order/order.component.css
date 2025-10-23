@@ -1,0 +1,13 @@
+.submitter {
+  border-radius: 5px;
+  border-style: none;
+}
+
+.submitter:hover {
+  animation: hoverBtn 1s forwards;
+}
+
+input {
+  border-radius: 5px;
+  border-style: none;
+}
