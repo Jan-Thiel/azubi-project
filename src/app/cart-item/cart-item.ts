@@ -10,13 +10,12 @@ import { CartItem } from '../model/cartItem.model'
 })
 export class CartItemComponent {
   readonly item = input.required<CartItem>()
-  readonly vehicleItem = input.required<readonly Vehicle[] | null>()
 
   cartItem = signal<CartItem | undefined>(undefined)
-  vehicle = signal<Vehicle | undefined>(undefined)
 
   ngOnInit(): void {
     this.cartItem.set(this.item())
-    this.vehicle.set(this.vehicleItem()![this.cartItem()!.vehicleId])
+    console.log('Vehicle Items: ')
+    console.log(this.cartItem())
   }
 }

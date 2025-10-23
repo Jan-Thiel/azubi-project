@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { EMPTY } from 'rxjs'
-import { map, catchError, switchMap } from 'rxjs/operators'
+import { map, catchError, switchMap, tap } from 'rxjs/operators'
 import { CartItemService } from '../../service/cartItem.service'
 import { CartsApiActions, CartsPageActions } from '../actions/carts.actions'
 
@@ -18,10 +18,18 @@ export class CartsEffects {
         CartsApiActions.changedCartItemTime,
         CartsApiActions.orderedCartItem,
       ),
+      tap(() => console.log('Effect triggered: loadCartItems')),
       switchMap(() =>
         this.cartsService.fetchCartItems(document).pipe(
-          map(carts => CartsApiActions.retrievedCartsList({ carts })),
-          catchError(() => EMPTY),
+          tap(carts => console.log('API returned carts:', carts)),
+          map(carts => {
+            console.log('Dispatching retrievedCartsList action with:', carts)
+            return CartsApiActions.retrievedCartsList({ carts })
+          }),
+          catchError(error => {
+            console.error('Error loading cart items:', error)
+            return EMPTY
+          }),
         ),
       ),
     )
@@ -30,7 +38,7 @@ export class CartsEffects {
   changeCartItemQuantity$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CartsPageActions.changeCartItemQuantity),
-      switchMap(({ cartItem, quant}) =>
+      switchMap(({ cartItem, quant }) =>
         this.cartsService.changeCartItemQuantity(cartItem, quant).pipe(
           map(cartItem => CartsApiActions.changedCartItemQuantity({ cartItem })),
           catchError(() => EMPTY),
@@ -42,7 +50,7 @@ export class CartsEffects {
   changeCartItemTime$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CartsPageActions.changeCartItemTime),
-      switchMap(({cartItem, time}) =>
+      switchMap(({ cartItem, time }) =>
         this.cartsService.changeCartItemTime(cartItem, time).pipe(
           map(cartItem => CartsApiActions.changedCartItemTime({ cartItem })),
           catchError(() => EMPTY),
@@ -54,8 +62,8 @@ export class CartsEffects {
   orderCartItem$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CartsPageActions.orderCartItem),
-      switchMap(({ cart, address, billingAddress, date }) =>
-        this.cartsService.orderCartItem(cart, address, billingAddress, date).pipe(
+      switchMap(({ cart, addressId, billingAddressId, date }) =>
+        this.cartsService.orderCartItem(cart, addressId, billingAddressId, date).pipe(
           map(cartItem => CartsApiActions.orderedCartItem({ cartItem })),
           catchError(() => EMPTY),
         ),

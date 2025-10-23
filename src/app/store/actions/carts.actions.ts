@@ -22,7 +22,12 @@ export const CartsPageActions = createActionGroup({
   source: 'CartItems Page',
   events: {
     'Load CartItems': emptyProps,
-    'Order CartItem': props<{ cart: number, address: string, billingAddress: string, date: string }>(),
+    'Order CartItem': props<{
+      cart: number
+      date: string
+      addressId: number
+      billingAddressId: number
+    }>(),
     'Change CartItem Quantity': props<{ cartItem: number; quant: number }>(),
     'Change CartItem Time': props<{ cartItem: number; time: number }>(),
   },

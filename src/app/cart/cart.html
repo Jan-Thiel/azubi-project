@@ -1,7 +1,14 @@
 @for (cartItem of cartItems$ | async; track $index) {
   <div class="card">
-    <app-cart-item [item]="cartItem" [vehicleItem]="vehicles$ | async" />
-    <app-cart-item-form [cartItemId]="cartItem.id"/>
-    <app-order [id]="cartItem.id"/>
+    <app-cart-item [item]="cartItem" />
+    <app-cart-item-form
+      [cartItemId]="cartItem.id"
+      (openPopup)="onOpenPopup()"
+      (selectedAddress)="onSelection($event)"
+    />
+    <app-order [id]="cartItem.id" [addressId]="addressId" />
   </div>
+}
+@if (popupVisible()) {
+  <app-address-popup (close)="onClosePopup()" />
 }

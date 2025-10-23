@@ -1,31 +1,42 @@
-import { Component, inject } from '@angular/core'
+import { Component, inject, signal } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { Observable } from 'rxjs'
-import { Vehicle } from '../model/vehicle.model'
-import { selectVehicles } from '../store/selectors/vehicles.selectors'
 import { CartItem } from '../model/cartItem.model'
 import { selectCartItems } from '../store/selectors/carts.selectors'
-import { VehiclesPageActions } from '../store/actions/vehicle.actions'
 import { CartsPageActions } from '../store/actions/carts.actions'
 import { AsyncPipe } from '@angular/common'
-import { VehicleForm } from '../vehicle-form/vehicle-form'
 import { CartItemComponent } from '../cart-item/cart-item'
 import { CartItemForm } from '../cart-item-form/cart-item-form'
-import { Order } from '../order/order';
+import { OrderComponent } from '../order/order.component'
+import { AddressPopup } from '../address-popup/address-popup'
 
 @Component({
   selector: 'cart',
-  imports: [AsyncPipe, CartItemComponent, CartItemForm, Order],
+  imports: [AsyncPipe, CartItemComponent, CartItemForm, OrderComponent, AddressPopup],
   templateUrl: './cart.html',
   styleUrl: './cart.css',
 })
 export class Cart {
   private store = inject(Store)
-  vehicles$: Observable<readonly Vehicle[]> = this.store.select(selectVehicles)
   cartItems$: Observable<readonly CartItem[]> = this.store.select(selectCartItems)
 
+  popupVisible = signal(false)
+  addressId: number = 0
+
+  onClosePopup() {
+    this.popupVisible.set(false)
+    console.log('Popup closed')
+  }
+
+  onOpenPopup() {
+    this.popupVisible.set(true)
+  }
+
+  onSelection(value: string) {
+    this.addressId = parseInt(value.valueOf())
+  }
+
   ngOnInit(): void {
-    this.store.dispatch(VehiclesPageActions.loadVehicles())
     this.store.dispatch(CartsPageActions.loadCartItems())
   }
 }

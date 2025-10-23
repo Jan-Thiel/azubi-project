@@ -11,13 +11,7 @@ export class CartItemService {
 
   constructor(private http: HttpClient) {}
 
-  createCartItem(
-    vehicleId: number,
-    time: number,
-    userId: number = 1,
-    price: number,
-    quantity: number,
-  ) {
+  createCartItem(vehicleId: number, time: number, userId: number, price: number, quantity: number) {
     this.http
       .post('http://localhost:8080/api/cartItems', {
         vehicleId: vehicleId,
@@ -36,15 +30,26 @@ export class CartItemService {
     })
   }
 
-   changeCartItemQuantity(id: number, quant: number) {
-    return this.http.post<ReadonlyArray<CartItem>>('http://localhost:8080/api/cartItems/changeQuantity', {id: id, quantity: quant})
+  changeCartItemQuantity(id: number, quant: number) {
+    return this.http.post<ReadonlyArray<CartItem>>(
+      'http://localhost:8080/api/cartItems/changeQuantity',
+      { id: id, quantity: quant },
+    )
   }
 
   changeCartItemTime(id: number, time: number) {
-    return this.http.post<ReadonlyArray<CartItem>>('http://localhost:8080/api/cartItems/changeTime', {id: id, time: time})
+    return this.http.post<ReadonlyArray<CartItem>>(
+      'http://localhost:8080/api/cartItems/changeTime',
+      { id: id, time: time },
+    )
   }
 
-  orderCartItem(id: number, address: string, billingAddress: string, date: string) {
-    return this.http.post<ReadonlyArray<CartItem>>('http://localhost:8080//api/orders/order', {id: id, address: address, billingAddress: billingAddress, date: date})
+  orderCartItem(cart: number, addressId: number, billingAddressId: number, date: string) {
+    return this.http.post<ReadonlyArray<CartItem>>('http://localhost:8080/api/orders/order', {
+      id: cart,
+      addressId: addressId,
+      billingAddressId: billingAddressId,
+      date: date,
+    })
   }
 }
