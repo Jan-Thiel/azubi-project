@@ -14,7 +14,7 @@ export class AddressEffects {
     return this.actions$.pipe(
       ofType(AddressPageActions.loadAddresses),
       switchMap(() => {
-        return this.addressService.fetchAddresses(document).pipe(
+        return this.addressService.fetchAddresses().pipe(
           map(addresses => AddressApiActions.retrievedAddresses({ addresses })),
           catchError(() => EMPTY),
         )
@@ -27,7 +27,7 @@ export class AddressEffects {
       ofType(AddressPageActions.createAddress),
       switchMap(({ street, houseNumber, zip, addressType, firstName, name, city }) => {
         return this.addressService
-          .createAddress(document, street, houseNumber, zip, addressType, firstName, name, city)
+          .createAddress(street, houseNumber, zip, addressType, firstName, name, city)
           .pipe(
             map(AddressPageActions.loadAddresses),
             catchError(() => EMPTY),

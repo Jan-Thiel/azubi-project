@@ -1,25 +1,27 @@
-import { inject, Injectable } from '@angular/core'
+import { inject, Injectable, PLATFORM_ID } from '@angular/core'
 import { HttpClient, HttpParams } from '@angular/common/http'
-import { CookieService } from './cookie.service'
+import { SsrCookieService } from 'ngx-cookie-service-ssr'
 import { Address } from '../model/address.model'
+import { isPlatformBrowser } from '@angular/common'
+import { CustomerService } from './customer.service'
+import { Observable } from 'rxjs'
 
 @Injectable({
   providedIn: 'root',
 })
 export class AddressService {
-  cookieService = inject(CookieService)
+  cookieService = inject(SsrCookieService)
+  customerService = inject(CustomerService)
 
   constructor(private http: HttpClient) {}
 
-  fetchAddresses(document: Document) {
-    console.log('Tryied fetching addresses')
+  fetchAddresses(): Observable<readonly Address[]> {
     return this.http.get<Address[]>('http://localhost:8080/api/addresses', {
-      params: new HttpParams().append('id', this.cookieService.getCookie('userId', document)),
+      params: new HttpParams().append('id', 'userIdInsertPlaceholder'),
     })
   }
 
   createAddress(
-    document: Document,
     street: string,
     houseNumber: string,
     zip: string,
@@ -27,7 +29,7 @@ export class AddressService {
     firstName: string,
     name: string,
     city: string,
-  ) {
+  ): Observable<readonly Address[]> {
     return this.http.post<ReadonlyArray<Address>>('http://localhost:8080/api/addresses', {
       street: street,
       houseNumber: houseNumber,
@@ -36,7 +38,7 @@ export class AddressService {
       firstName: firstName,
       name: name,
       city: city,
-      customerId: this.cookieService.getCookie('userId', document),
+      customerId: 'userIdInsertPlaceholder',
     })
   }
 

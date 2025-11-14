@@ -1,14 +1,16 @@
 import { HttpClient, HttpParams } from '@angular/common/http'
-import { inject, Injectable } from '@angular/core'
+import { inject, Injectable, PLATFORM_ID } from '@angular/core'
 import { CartItem } from '../model/cartItem.model'
-import { CookieService } from './cookie.service'
+import { SsrCookieService } from 'ngx-cookie-service-ssr'
+import { isPlatformBrowser } from '@angular/common'
+import { Address } from '../model/address.model'
+import { CustomerService } from './customer.service'
+import { Observable } from 'rxjs'
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartItemService {
-  cookieService = inject(CookieService)
-
   constructor(private http: HttpClient) {}
 
   createCartItem(vehicleId: number, time: number, userId: number, price: number, quantity: number) {
@@ -24,9 +26,10 @@ export class CartItemService {
     console.log('posted!')
   }
 
-  fetchCartItems(document: Document) {
+  fetchCartItems(): Observable<readonly CartItem[]> {
+    console.log('Fetch cart Items')
     return this.http.get<CartItem[]>('http://localhost:8080/api/cartItems', {
-      params: new HttpParams().append('userId', this.cookieService.getCookie('userId', document)),
+      params: new HttpParams().append('userId', 'userIdInsertPlaceholder'),
     })
   }
 
@@ -51,5 +54,9 @@ export class CartItemService {
       billingAddressId: billingAddressId,
       date: date,
     })
+  }
+
+  removeCartItem(id: number) {
+    return this.http.post('http://localhost:8080/api/cartItems/removeItem', { id: id })
   }
 }
