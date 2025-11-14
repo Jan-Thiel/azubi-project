@@ -1,0 +1,30 @@
+button {
+  border-radius: 5px;
+  border-style: none;
+  background: white;
+  box-shadow:
+    inset -5px -5px 10px rgba(108, 108, 108, 0.44),
+    inset 5px 5px 10px rgba(89, 89, 99, 0.13);
+}
+select {
+  border-radius: 5px;
+  border-style: none;
+  box-shadow:
+    inset -5px -5px 10px rgba(108, 108, 108, 0.44),
+    inset 5px 5px 10px rgba(89, 89, 99, 0.13);
+  color: var(--accent-color);
+}
+
+input {
+  border-radius: 5px;
+  border-style: none;
+  box-shadow:
+    inset -5px -5px 10px rgba(191, 191, 191, 0.44),
+    inset 5px 5px 10px rgba(149, 149, 165, 0.13);
+  color: var(--accent-color);
+  padding: 10px;
+}
+
+input:hover {
+  cursor: pointer;
+}

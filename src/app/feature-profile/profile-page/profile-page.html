@@ -1,0 +1,44 @@
+<h1>Profile</h1>
+<div class="card">
+  <span>Name: {{ (customer$ | async)?.name }} {{ (customer$ | async)?.surname }}</span>
+  <p>
+    Email: {{ (customer$ | async)?.email }} <button (click)="onOpenEmailPopup()">Change</button>
+  </p>
+  <p>Password: <button (click)="onOpenPasswordPopup()">Change</button></p>
+</div>
+<div class="card">
+  @for (address of addresses | async; track address.id) {
+    <p>
+      {{ address.firstName }} {{ address.name }} {{ address.street }} {{ address.houseNumber }}
+      {{ address.zip }} {{ address.city }}
+      <button (click)="onOpenChangePopup(address)">Change</button
+      ><button (click)="deleteAddress(address.id)">Delete</button>
+    </p>
+  }
+  <button (click)="onOpenPopup()">Add Address</button>
+</div>
+
+@if (popupVisible()) {
+  <app-address-popup (close)="onClosePopup()" />
+}
+
+@if (changePopupVisible()) {
+  <app-address-change-popup
+    [firstName]="firstName"
+    [name]="name"
+    [street]="street"
+    [houseNumber]="houseNumber"
+    [city]="city"
+    [zip]="zip"
+    [id]="id"
+    (close)="onCloseChangePopup()"
+  />
+}
+
+@if (emailPopupVisible()) {
+  <app-email-change-popup (close)="onCloseEmailPopup()" />
+}
+
+@if (passwordPopupVisible()) {
+  <app-password-change-popup (close)="onClosePasswordPopup()" />
+}
