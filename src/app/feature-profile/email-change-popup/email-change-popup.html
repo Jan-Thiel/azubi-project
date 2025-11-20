@@ -1,0 +1,14 @@
+<div class="bkg">
+  <div class="card">
+    <div class="exit">
+      <h1 (click)="onClose()">X</h1>
+    </div>
+    <h3>Change Email:</h3>
+    <form (ngSubmit)="changeEmail()">
+      <label>
+        <input id="email" type="email" name="email" [(ngModel)]="email" placeholder="New Email" />
+      </label>
+      <input type="submit" value="Enter" />
+    </form>
+  </div>
+</div>
