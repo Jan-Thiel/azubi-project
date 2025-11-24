@@ -15,6 +15,7 @@ export const CartsApiActions = createActionGroup({
     'Ordered CartItem': props<{ cartItem: ReadonlyArray<CartItem> }>(),
     'Changed CartItem Quantity': props<{ cartItem: ReadonlyArray<CartItem> }>(),
     'Changed CartItem Time': props<{ cartItem: ReadonlyArray<CartItem> }>(),
+    'Deleted CartItem': emptyProps,
   },
 })
 
@@ -30,5 +31,6 @@ export const CartsPageActions = createActionGroup({
     }>(),
     'Change CartItem Quantity': props<{ cartItem: number; quant: number }>(),
     'Change CartItem Time': props<{ cartItem: number; time: number }>(),
+    'Delete CartItem': props<{ id: number }>(),
   },
 })

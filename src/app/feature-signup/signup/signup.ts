@@ -28,10 +28,6 @@ export class Signup {
   }
 
   signup(): void {
-    if (this.customerService.signup(this.email, this.password, this.firstName, this.surname)) {
-      console.log('Signup!')
-    } else {
-      console.log('fail!')
-    }
+    this.customerService.signup(this.email, this.password, this.firstName, this.surname)
   }
 }

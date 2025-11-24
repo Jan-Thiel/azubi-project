@@ -6,11 +6,19 @@
     |
     <a href="/orders">Orders</a>
     |
-    <a href="/login">Login</a>
-    |
-    <a href="/signup">Sign up</a>
-    |
-    <a href="/profile">Profile</a>
+    @if (!logged()) {
+      <a href="/login">Login</a>
+      |
+      <a href="/signup">Sign up</a>
+      |
+    }
+    @if (logged()) {
+      <a href="/logout">Logout</a>
+      |
+    }
+    @if (!anon()) {
+      <a href="/profile">Profile</a>
+    }
   </nav>
   <router-outlet />
 </main>

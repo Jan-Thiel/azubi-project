@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { EMPTY } from 'rxjs'
-import { map, catchError, switchMap, tap } from 'rxjs/operators'
+import { map, catchError, switchMap } from 'rxjs/operators'
 import { CartItemService } from '../../service/cartItem.service'
 import { CartsApiActions, CartsPageActions } from '../actions/carts.actions'
 
@@ -17,17 +17,14 @@ export class CartsEffects {
         CartsApiActions.changedCartItemQuantity,
         CartsApiActions.changedCartItemTime,
         CartsApiActions.orderedCartItem,
+        CartsApiActions.deletedCartItem,
       ),
-      tap(() => console.log('Effect triggered: loadCartItems')),
       switchMap(() =>
-        this.cartsService.fetchCartItems(document).pipe(
-          tap(carts => console.log('API returned carts:', carts)),
+        this.cartsService.fetchCartItems().pipe(
           map(carts => {
-            console.log('Dispatching retrievedCartsList action with:', carts)
             return CartsApiActions.retrievedCartsList({ carts })
           }),
           catchError(error => {
-            console.error('Error loading cart items:', error)
             return EMPTY
           }),
         ),
@@ -66,6 +63,19 @@ export class CartsEffects {
         this.cartsService.orderCartItem(cart, addressId, billingAddressId, date).pipe(
           map(cartItem => CartsApiActions.orderedCartItem({ cartItem })),
           catchError(() => EMPTY),
+        ),
+      ),
+    )
+  })
+
+  deleteCartItem$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CartsPageActions.deleteCartItem),
+      switchMap(({ id }) =>
+        this.cartsService.removeCartItem(id).pipe(
+          map(carts => {
+            return CartsApiActions.deletedCartItem()
+          }),
         ),
       ),
     )
