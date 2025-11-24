@@ -9,8 +9,9 @@ export class VehicleService {
   constructor(private http: HttpClient) {}
 
   fetchVehicleApi() {
-    var header = new HttpHeaders()
-    header.append('X-Requested-With', 'XMLHttpRequest')
+    const header = new HttpHeaders({
+      'X-Requested-With': 'XMLHttpRequest',
+    })
     return this.http.get<Vehicle[]>('http://localhost:8080/api/vehicles', { headers: header })
   }
 }

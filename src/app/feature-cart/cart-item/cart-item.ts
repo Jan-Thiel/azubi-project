@@ -1,5 +1,4 @@
-import { Component, input, signal } from '@angular/core'
-import { Vehicle } from '../../model/vehicle.model'
+import { Component, input, OnInit, signal } from '@angular/core';
 import { CartItem } from '../../model/cartItem.model'
 
 @Component({
@@ -8,7 +7,7 @@ import { CartItem } from '../../model/cartItem.model'
   templateUrl: './cart-item.html',
   styleUrl: './cart-item.css',
 })
-export class CartItemComponent {
+export class CartItemComponent implements OnInit{
   readonly item = input.required<CartItem>()
 
   cartItem = signal<CartItem | undefined>(undefined)

@@ -13,37 +13,34 @@ import { Observable } from 'rxjs'
 export class CartItemService {
   constructor(private http: HttpClient) {}
 
-  createCartItem(vehicleId: number, time: number, userId: number, price: number, quantity: number) {
-    this.http
-      .post('http://localhost:8080/api/cartItems', {
-        vehicleId: vehicleId,
-        time: time,
-        userId: userId,
-        price: price,
-        quantity: quantity,
-      })
-      .subscribe()
-    console.log('posted!')
+  createCartItem(vehicleId: number, time: number, price: number, quantity: number) {
+    return this.http.post('http://localhost:8080/api/cartItems', {
+      vehicleId: vehicleId,
+      time: time,
+      userId: 0,
+      price: price,
+      quantity: quantity,
+      withCredentials: true,
+    })
   }
 
   fetchCartItems(): Observable<readonly CartItem[]> {
-    console.log('Fetch cart Items')
     return this.http.get<CartItem[]>('http://localhost:8080/api/cartItems', {
-      params: new HttpParams().append('userId', 'userIdInsertPlaceholder'),
+      withCredentials: true,
     })
   }
 
   changeCartItemQuantity(id: number, quant: number) {
     return this.http.post<ReadonlyArray<CartItem>>(
       'http://localhost:8080/api/cartItems/changeQuantity',
-      { id: id, quantity: quant },
+      { id: id, quantity: quant, withCredentials: true },
     )
   }
 
   changeCartItemTime(id: number, time: number) {
     return this.http.post<ReadonlyArray<CartItem>>(
       'http://localhost:8080/api/cartItems/changeTime',
-      { id: id, time: time },
+      { id: id, time: time, withCredentials: true },
     )
   }
 
@@ -53,10 +50,14 @@ export class CartItemService {
       addressId: addressId,
       billingAddressId: billingAddressId,
       date: date,
+      withCredentials: true,
     })
   }
 
   removeCartItem(id: number) {
-    return this.http.post('http://localhost:8080/api/cartItems/removeItem', { id: id })
+    return this.http.post('http://localhost:8080/api/cartItems/removeItem', {
+      id: id,
+      withCredentials: true,
+    })
   }
 }

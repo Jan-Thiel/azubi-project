@@ -12,8 +12,6 @@ export class OrderService {
   constructor(private http: HttpClient) {}
 
   fetchOrdersApi() {
-    return this.http.get<Order[]>('http://localhost:8080/api/orders', {
-      params: new HttpParams().append('userId', 'userIdInsertPlaceholder'),
-    })
+    return this.http.get<Order[]>('http://localhost:8080/api/orders', { withCredentials: true })
   }
 }

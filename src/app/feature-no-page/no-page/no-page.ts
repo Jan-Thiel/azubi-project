@@ -1,14 +1,10 @@
-import { Component } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
+import { Component } from '@angular/core'
+import { NgOptimizedImage } from '@angular/common'
 
 @Component({
   selector: 'app-no-page',
-  imports: [
-    NgOptimizedImage
-  ],
+  imports: [NgOptimizedImage],
   templateUrl: './no-page.html',
-  styleUrl: './no-page.css'
+  styleUrl: './no-page.css',
 })
-export class NoPage {
-
-}
+export class NoPage {}

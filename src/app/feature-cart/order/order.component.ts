@@ -1,6 +1,5 @@
 import { Component, inject, input } from '@angular/core'
 import { FormsModule } from '@angular/forms'
-import { CartItemService } from '../../service/cartItem.service'
 import { Router } from '@angular/router'
 import { CartsPageActions } from '../../store/actions/carts.actions'
 import { Store } from '@ngrx/store'
@@ -29,6 +28,6 @@ export class OrderComponent {
       }),
     )
     // Order confirmation is displayed upon successful order
-    this.router.navigate(['/orderConf', this.id()])
+    this.router.navigate(['/orderConf', this.id()]).then()
   }
 }

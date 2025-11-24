@@ -1,4 +1,4 @@
-import { Component, inject, input, output } from '@angular/core'
+import { Component, inject, output } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { CustomerService } from '../../service/customer.service'
 
@@ -8,7 +8,7 @@ import { CustomerService } from '../../service/customer.service'
   templateUrl: './email-change-popup.html',
   styleUrl: './email-change-popup.css',
 })
-export class EmailChangePopup {
+export class EmailChangePopup{
   customerService = inject(CustomerService)
 
   email: string | undefined

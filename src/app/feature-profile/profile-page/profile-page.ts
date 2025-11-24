@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core'
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Store } from '@ngrx/store'
 import { CustomerService } from '../../service/customer.service'
 import { Customer } from '../../model/customer.model'
@@ -19,7 +19,7 @@ import { PasswordChangePopup } from '../password-change-popup/password-change-po
   templateUrl: './profile-page.html',
   styleUrl: './profile-page.css',
 })
-export class ProfilePage {
+export class ProfilePage implements OnInit{
   customerService = inject(CustomerService)
   addressService = inject(AddressService)
   store = inject(Store)
@@ -45,7 +45,6 @@ export class ProfilePage {
 
   onClosePopup() {
     this.popupVisible.set(false)
-    console.log('Popup closed')
   }
 
   onOpenPopup() {
@@ -54,7 +53,6 @@ export class ProfilePage {
 
   onCloseChangePopup() {
     this.changePopupVisible.set(false)
-    console.log('Popup closed')
   }
 
   onOpenChangePopup(address: Address) {

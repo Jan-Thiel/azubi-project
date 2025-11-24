@@ -1,10 +1,10 @@
-import { Component, inject, input, output, signal } from '@angular/core'
+import { Component, inject, input, OnInit, output, PLATFORM_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms'
 import { Store } from '@ngrx/store'
 import { CartsPageActions } from '../../store/actions/carts.actions'
 import { selectAddress } from '../../store/selectors/address.selectors'
 import { AddressPageActions } from '../../store/actions/address.actions'
-import { AsyncPipe } from '@angular/common'
+import { AsyncPipe, isPlatformBrowser } from '@angular/common'
 
 @Component({
   selector: 'app-cart-item-form',
@@ -12,11 +12,12 @@ import { AsyncPipe } from '@angular/common'
   templateUrl: './cart-item-form.html',
   styleUrl: './cart-item-form.css',
 })
-export class CartItemForm {
+export class CartItemForm implements OnInit{
   readonly cartItemId = input.required<number>()
   time = 1
   quantity = 1
   private store = inject(Store)
+  platformId = inject(PLATFORM_ID)
   addresses$ = this.store.select(selectAddress)
   openPopup = output<void>()
 
@@ -42,7 +43,6 @@ export class CartItemForm {
   }
 
   onSelect(value: string) {
-    console.log('Address Value Changed: ', value)
     this.selectedAddress.emit(value)
   }
 
@@ -51,6 +51,8 @@ export class CartItemForm {
   }
 
   ngOnInit() {
-    this.store.dispatch(AddressPageActions.loadAddresses())
+    if (isPlatformBrowser(this.platformId)) {
+      this.store.dispatch(AddressPageActions.loadAddresses())
+    }
   }
 }

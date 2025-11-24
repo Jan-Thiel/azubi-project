@@ -1,4 +1,4 @@
-import { Component, inject, input, output } from '@angular/core'
+import { Component, inject, input, OnInit, output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { Store } from '@ngrx/store'
 import { AddressPageActions } from '../../store/actions/address.actions'
@@ -10,7 +10,7 @@ import { AddressService } from '../../service/address.service'
   templateUrl: './address-change-popup.html',
   styleUrl: './address-change-popup.css',
 })
-export class AddressChangePopup {
+export class AddressChangePopup implements OnInit{
   close = output<void>()
 
   firstName = input.required<string>()

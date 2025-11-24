@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core'
+import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core'
 import { VehicleComponent } from '../vehicle/vehicle'
 import { FormsModule } from '@angular/forms'
 import { VehicleForm } from '../vehicle-form/vehicle-form'
@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store'
 import { selectVehicles } from '../../store/selectors/vehicles.selectors'
 import { Vehicle } from '../../model/vehicle.model'
 import { Observable } from 'rxjs'
-import { CommonModule } from '@angular/common'
+import { CommonModule, isPlatformBrowser } from '@angular/common'
 import { VehiclesPageActions } from '../../store/actions/vehicle.actions'
 
 @Component({
@@ -17,12 +17,13 @@ import { VehiclesPageActions } from '../../store/actions/vehicle.actions'
 })
 export class VehicleList implements OnInit {
   private store = inject(Store)
+  platformId = inject(PLATFORM_ID)
 
   vehicles$: Observable<readonly Vehicle[]> = this.store.select(selectVehicles)
 
   ngOnInit(): void {
-    console.log("Inited")
-    this.store.dispatch(VehiclesPageActions.loadVehicles())
-    console.log("Done do the load")
+    if (isPlatformBrowser(this.platformId)) {
+      this.store.dispatch(VehiclesPageActions.loadVehicles())
+    }
   }
 }

@@ -5,19 +5,21 @@ import { Address } from '../model/address.model'
 import { isPlatformBrowser } from '@angular/common'
 import { CustomerService } from './customer.service'
 import { Observable } from 'rxjs'
+import { tap } from 'rxjs/operators'
+import { CookieService } from 'ngx-cookie-service'
+import { CookieSetterService } from './cookieSetter.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class AddressService {
-  cookieService = inject(SsrCookieService)
-  customerService = inject(CustomerService)
+  cookieSetter = inject(CookieSetterService)
 
   constructor(private http: HttpClient) {}
 
   fetchAddresses(): Observable<readonly Address[]> {
     return this.http.get<Address[]>('http://localhost:8080/api/addresses', {
-      params: new HttpParams().append('id', 'userIdInsertPlaceholder'),
+      credentials: 'include',
     })
   }
 
@@ -38,11 +40,11 @@ export class AddressService {
       firstName: firstName,
       name: name,
       city: city,
-      customerId: 'userIdInsertPlaceholder',
+      credentials: 'include',
     })
   }
 
   removeAddress(id: number) {
-    this.http.post('http://localhost:8080/api/addresses/delete', { id: id })
+    this.http.post('http://localhost:8080/api/addresses/delete', { id: id, withCredentials: true })
   }
 }

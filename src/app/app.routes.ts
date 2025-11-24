@@ -1,16 +1,18 @@
 import { Routes } from '@angular/router'
-import { Cart } from './cart/cart'
-import { VehicleList } from './vehicle-list/vehicle-list'
-import { Login } from './login/login'
-import { Signup } from './signup/signup'
-import { OrderConf } from './order-conf/order-conf'
+import { Cart } from './feature-cart/cart/cart'
+import { VehicleList } from './feature-vehicle-page/vehicle-list/vehicle-list'
+import { Login } from './feature-login/login/login'
+import { Signup } from './feature-signup/signup/signup'
+import { OrderConf } from './feature-cart/order-conf/order-conf'
 import { Orders } from './orders/orders'
-import { ProfilePage } from './profile-page/profile-page'
+import { ProfilePage } from './feature-profile/profile-page/profile-page'
+import { Logout } from './feature-login/logout/logout'
+import { NoPage } from './feature-no-page/no-page/no-page'
 
 export const routes: Routes = [
   {
     path: '',
-    title: 'App Home Page',
+    title: 'Home Page',
     component: VehicleList,
   },
   {
@@ -42,5 +44,15 @@ export const routes: Routes = [
     path: 'profile',
     title: 'Profile',
     component: ProfilePage,
+  },
+  {
+    path: 'logout',
+    title: '',
+    component: Logout,
+  },
+  {
+    path: '**',
+    title: '404',
+    component: NoPage,
   },
 ]

@@ -8,7 +8,7 @@ import { provideRouter } from '@angular/router'
 
 import { routes } from './app.routes'
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser'
-import { provideHttpClient, withFetch } from '@angular/common/http'
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http'
 import { provideStore, StoreModule } from '@ngrx/store'
 import { vehiclesReducer } from './store/reducers/vehicles.reducer'
 import { provideEffects } from '@ngrx/effects'
@@ -16,10 +16,10 @@ import { VehiclesEffects } from './store/effects/vehicles.effects'
 import { cartsReducer } from './store/reducers/carts.reducers'
 import { CartsEffects } from './store/effects/carts.effects'
 import { ordersReducer } from './store/reducers/orders.reducers'
-import { OrderConf } from './order-conf/order-conf'
 import { OrdersEffects } from './store/effects/orders.effects'
 import { addressReducer } from './store/reducers/address.reducers'
 import { AddressEffects } from './store/effects/address.effects'
+import { cookieForwardingInterceptor } from './interceptors/auth-header.interceptor'
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -27,7 +27,7 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(),
+    provideHttpClient(withFetch(), withInterceptors([cookieForwardingInterceptor])),
     provideStore(),
     importProvidersFrom(
       StoreModule.forRoot({

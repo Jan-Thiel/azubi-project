@@ -1,5 +1,4 @@
-import { Component, inject, input, signal } from '@angular/core'
-import { VehicleService } from '../../service/vehicle.service'
+import { Component, input, signal } from '@angular/core'
 import { Vehicle } from '../../model/vehicle.model'
 
 @Component({

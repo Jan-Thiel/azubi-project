@@ -1,9 +1,8 @@
-import { Component, EventEmitter, inject, output, Output } from '@angular/core'
+import { Component, inject, OnInit, output, PLATFORM_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms'
 import { Store } from '@ngrx/store'
-import { selectAddress } from '../../store/selectors/address.selectors'
 import { AddressPageActions } from '../../store/actions/address.actions'
-import { Observable } from 'rxjs'
+import { isPlatformBrowser } from '@angular/common'
 
 @Component({
   selector: 'app-address-popup',
@@ -11,7 +10,7 @@ import { Observable } from 'rxjs'
   templateUrl: './address-popup.html',
   styleUrl: './address-popup.css',
 })
-export class AddressPopup {
+export class AddressPopup implements OnInit{
   close = output<void>()
 
   firstName: string = ''
@@ -22,6 +21,7 @@ export class AddressPopup {
   zip: string = ''
 
   store = inject(Store)
+  platformId = inject(PLATFORM_ID)
 
   addAddress(): void {
     this.store.dispatch(
@@ -40,11 +40,12 @@ export class AddressPopup {
   onClose() {
     // This is called when the popup closes
     this.close.emit()
-    console.log('Popup close button pressed')
   }
 
   ngOnInit(): void {
     // Load all addresses of the user
-    this.store.dispatch(AddressPageActions.loadAddresses())
+    if (isPlatformBrowser(this.platformId)) {
+      this.store.dispatch(AddressPageActions.loadAddresses())
+    }
   }
 }
