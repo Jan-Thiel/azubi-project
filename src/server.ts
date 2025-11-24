@@ -41,7 +41,22 @@ app.use(
 app.use((req, res, next) => {
   angularApp
     .handle(req)
-    .then(response => (response ? writeResponseToNodeResponse(response, res) : next()))
+    .then(response => {
+      if (response) {
+        // Extract Set-Cookie headers from the Angular response
+        const setCookieHeaders = response.headers.getSetCookie?.() || []
+
+        // Forward them to the Express response
+        if (setCookieHeaders.length > 0) {
+          res.setHeader('Set-Cookie', setCookieHeaders)
+        }
+
+        // Write the response
+        writeResponseToNodeResponse(response, res).then()
+      } else {
+        next()
+      }
+    })
     .catch(next)
 })
 
