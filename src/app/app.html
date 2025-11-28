@@ -1,6 +1,6 @@
 <main class="main">
   <nav>
-    <a href="/">Vehicle List</a>
+    <a href="/vehicles">Vehicle List</a>
     |
     <a href="/cart">Cart</a>
     |
@@ -10,13 +10,10 @@
       <a href="/login">Login</a>
       |
       <a href="/signup">Sign up</a>
-      |
     }
     @if (logged()) {
       <a href="/logout">Logout</a>
       |
-    }
-    @if (!anon()) {
       <a href="/profile">Profile</a>
     }
   </nav>

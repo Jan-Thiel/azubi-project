@@ -25,14 +25,6 @@ export class App {
   }
 
   ngOnInit() {
-    this.customerService.loginChange.pipe(first()).subscribe(logged => {
-      this.logged.set(logged)
-      if (isPlatformBrowser(PLATFORM_ID)) {
-        if (this.cookieService.get('isAnon') === 'false') {
-          this.anon.set(true)
-        }
-      }
-    })
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart && event.url.includes('/logout')) {
         this.cookieService.delete('userId')
@@ -41,8 +33,8 @@ export class App {
         this.router.navigate(['/login']).then()
       } else if (event instanceof NavigationStart) {
         if (isPlatformBrowser(this.platformId)) {
-          if (this.cookieService.check('jwt')) {
-            this.customerService.loginChange.emit(true)
+          if (this.cookieService.check('refreshToken')) {
+            this.logged.set(true)
           }
         }
       }
