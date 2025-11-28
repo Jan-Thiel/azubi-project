@@ -8,17 +8,23 @@ import { Orders } from './orders/orders'
 import { ProfilePage } from './feature-profile/profile-page/profile-page'
 import { Logout } from './feature-login/logout/logout'
 import { NoPage } from './feature-no-page/no-page/no-page'
+import { Homepage } from './homepage/homepage';
 
 export const routes: Routes = [
   {
-    path: '',
-    title: 'Home Page',
+    path: 'vehicles',
+    title: 'Listings',
     component: VehicleList,
   },
   {
     path: 'cart',
     title: 'Cart',
     component: Cart,
+  },
+  {
+    path: '',
+    title: 'Home',
+    component: Homepage,
   },
   {
     path: 'login',

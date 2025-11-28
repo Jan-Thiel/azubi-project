@@ -1,0 +1,11 @@
+p.title {
+  font-size: 30pt;
+  font-family: "Alfa Slab One", serif;
+  font-weight: 400;
+  font-style: normal;
+  margin: 20px;
+}
+
+div.title {
+  margin: 50px;
+}
