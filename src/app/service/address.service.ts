@@ -1,25 +1,17 @@
-import { inject, Injectable, PLATFORM_ID } from '@angular/core'
-import { HttpClient, HttpParams } from '@angular/common/http'
-import { SsrCookieService } from 'ngx-cookie-service-ssr'
+import { Injectable } from '@angular/core'
+import { HttpClient } from '@angular/common/http'
 import { Address } from '../model/address.model'
-import { isPlatformBrowser } from '@angular/common'
-import { CustomerService } from './customer.service'
 import { Observable } from 'rxjs'
-import { tap } from 'rxjs/operators'
-import { CookieService } from 'ngx-cookie-service'
-import { CookieSetterService } from './cookieSetter.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class AddressService {
-  cookieSetter = inject(CookieSetterService)
-
   constructor(private http: HttpClient) {}
 
   fetchAddresses(): Observable<readonly Address[]> {
     return this.http.get<Address[]>('http://localhost:8080/api/addresses', {
-      credentials: 'include',
+      withCredentials: true,
     })
   }
 
@@ -32,19 +24,26 @@ export class AddressService {
     name: string,
     city: string,
   ): Observable<readonly Address[]> {
-    return this.http.post<ReadonlyArray<Address>>('http://localhost:8080/api/addresses', {
-      street: street,
-      houseNumber: houseNumber,
-      zip: zip,
-      type: type,
-      firstName: firstName,
-      name: name,
-      city: city,
-      credentials: 'include',
-    })
+    return this.http.post<ReadonlyArray<Address>>(
+      'http://localhost:8080/api/addresses',
+      {
+        street: street,
+        houseNumber: houseNumber,
+        zip: zip,
+        type: type,
+        firstName: firstName,
+        name: name,
+        city: city,
+      },
+      { withCredentials: true },
+    )
   }
 
   removeAddress(id: number) {
-    this.http.post('http://localhost:8080/api/addresses/delete', { id: id, withCredentials: true })
+    this.http.post(
+      'http://localhost:8080/api/addresses/delete',
+      { id: id },
+      { withCredentials: true },
+    )
   }
 }
