@@ -1,10 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, PLATFORM_ID, signal } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { CustomerService } from '../../service/customer.service'
 import { Customer } from '../../model/customer.model'
 import { selectAddress } from '../../store/selectors/address.selectors'
 import { AddressPageActions } from '../../store/actions/address.actions'
-import { AsyncPipe } from '@angular/common'
+import { AsyncPipe, isPlatformBrowser } from '@angular/common'
 import { AddressService } from '../../service/address.service'
 import { AddressPopup } from '../../feature-cart/address-popup/address-popup'
 import { AddressChangePopup } from '../address-change-popup/address-change-popup'
@@ -19,10 +19,11 @@ import { PasswordChangePopup } from '../password-change-popup/password-change-po
   templateUrl: './profile-page.html',
   styleUrl: './profile-page.css',
 })
-export class ProfilePage implements OnInit{
+export class ProfilePage implements OnInit {
   customerService = inject(CustomerService)
   addressService = inject(AddressService)
   store = inject(Store)
+  platformId = inject(PLATFORM_ID)
 
   customer$: Observable<Customer> | undefined
   addresses = this.store.select(selectAddress)
@@ -83,7 +84,9 @@ export class ProfilePage implements OnInit{
   }
 
   ngOnInit() {
-    this.store.dispatch(AddressPageActions.loadAddresses())
-    this.customer$ = this.customerService.getUserData()
+    if (isPlatformBrowser(this.platformId)) {
+      this.store.dispatch(AddressPageActions.loadAddresses())
+      this.customer$ = this.customerService.getUserData()
+    }
   }
 }
