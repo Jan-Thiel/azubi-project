@@ -1,14 +1,24 @@
 @for (cartItem of cartItems$ | async; track $index) {
-  <div class="card">
-    <app-cart-item [item]="cartItem" />
-    <app-cart-item-form
-      [cartItemId]="cartItem.id"
-      (openPopup)="onOpenPopup()"
-      (selectedAddress)="onSelection($event)"
-    />
-    <app-order [id]="cartItem.id" [addressId]="addressId" />
+  <div>
+    <div class="card">
+      <app-cart-item [item]="cartItem" />
+      <app-cart-item-form [cartItemId]="cartItem.id" (openPopup)="onOpenOrderPopup(cartItem.id)" />
+      <app-order [id]="cartItem.id" [addressId]="addressId" [billingAddressId]="billingAddressId" />
+    </div>
+    @if (OrderPopupVisible() === String(cartItem.id)) {
+      <app-order-popup
+        (close)="onCloseOrderPopup()"
+        (selectedAddress)="onSelection($event)"
+        (selectedBillingAddress)="onSelectionBilling($event)"
+        (openPopup)="onOpenAddressPopup()"
+        [id]="cartItem.id"
+        [addressId]="addressId"
+        [billingAddressId]="billingAddressId"
+      />
+    }
   </div>
+
 }
-@if (popupVisible()) {
-  <app-address-popup (close)="onClosePopup()" />
+@if (AddressPopupVisible()) {
+  <app-address-popup (close)="onCloseAddressPopup()" />
 }

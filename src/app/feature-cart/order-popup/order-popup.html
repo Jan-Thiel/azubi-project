@@ -1,0 +1,37 @@
+<div class="bkg">
+  <div class="card">
+    <div class="exit">
+      <h1 (click)="onClose()">X</h1>
+    </div>
+    <h3>Order:</h3>
+    <form>
+      <select #address (change)="onSelect(address.value)">
+        <option>Select Address</option>
+        @for (address of addresses$ | async; track address.id) {
+          <option [value]="address.id">
+            {{ address.name }} {{ address.firstName }}, {{ address.street }}
+            {{ address.houseNumber }}, {{ address.zip }} {{ address.city }}
+          </option>
+        }
+      </select>
+      <select #address (change)="onSelectBilling(address.value)">
+        <option>Select Billing Address</option>
+        @for (address of addresses$ | async; track address.id) {
+          <option [value]="address.id">
+            {{ address.name }} {{ address.firstName }}, {{ address.street }}
+            {{ address.houseNumber }}, {{ address.zip }} {{ address.city }}
+          </option>
+        }
+      </select>
+      <br />
+      <button (click)="popupOpen()">Add Address</button>
+    </form>
+    <form (ngSubmit)="order()">
+      <label for="date">
+        Date:
+        <input id="date" [(ngModel)]="date" type="date" name="date" />
+      </label>
+      <input id="time" value="Submit" type="submit" class="submitter" />
+    </form>
+  </div>
+</div>

@@ -22,17 +22,8 @@
         (ngModelChange)="quantChange()"
       />
     </label>
-    <select #address (change)="onSelect(address.value)">
-      <option>Select Address</option>
-      @for (address of addresses$ | async; track address.id) {
-        <option [value]="address.id">
-          {{ address.name }} {{ address.firstName }}, {{ address.street }}
-          {{ address.houseNumber }}, {{ address.zip }} {{ address.city }}
-        </option>
-      }
-    </select>
     <br />
-    <button (click)="popupOpen()">Add Address</button>
+    <button (click)="popupOpen()">Order</button>
     <br />
     <button (click)="onDelete()">Delete</button>
   </form>

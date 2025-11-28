@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { CartsPageActions } from '../../store/actions/carts.actions'
 import { Store } from '@ngrx/store'
@@ -12,7 +12,7 @@ import { selectCartItems } from '../../store/selectors/carts.selectors'
   templateUrl: './order-conf.html',
   styleUrl: './order-conf.css',
 })
-export class OrderConf implements OnInit{
+export class OrderConf implements OnInit {
   store = inject(Store)
   route = inject(ActivatedRoute)
 

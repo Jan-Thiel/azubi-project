@@ -27,11 +27,14 @@ export class CustomerService {
 
   async login(email: string, password: string) {
     try {
-      let reply = this.http.post<Auth>('http://localhost:8080/api/customers/login', {
-        email: email,
-        password: password,
-        withCredentials: true,
-      })
+      let reply = this.http.post<Auth>(
+        'http://localhost:8080/api/customers/login',
+        {
+          email: email,
+          password: password,
+        },
+        { withCredentials: true },
+      )
 
       reply.subscribe(auth => {
         // Set all necessary cookies when logged in
@@ -86,18 +89,24 @@ export class CustomerService {
   }
 
   changeEmail(email: string) {
-    this.http.post('http://localhost:8080/api/customers/changeEmail', {
-      email: email,
-      withCredentials: true,
-    })
+    this.http.post(
+      'http://localhost:8080/api/customers/changeEmail',
+      {
+        email: email,
+      },
+      { withCredentials: true },
+    )
   }
 
   changePassword(password: string, newPassword: string) {
-    this.http.post('http://localhost:8080/api/customers/changePassword', {
-      password: password,
-      newPassword: newPassword,
-      withCredentials: true,
-    })
+    this.http.post(
+      'http://localhost:8080/api/customers/changePassword',
+      {
+        password: password,
+        newPassword: newPassword,
+      },
+      { withCredentials: true },
+    )
   }
 
   ngOnInit() {

@@ -9,10 +9,11 @@ import { CartItemComponent } from '../cart-item/cart-item'
 import { CartItemForm } from '../cart-item-form/cart-item-form'
 import { OrderComponent } from '../order/order.component'
 import { AddressPopup } from '../address-popup/address-popup'
+import { OrderPopup } from '../order-popup/order-popup'
 
 @Component({
   selector: 'cart',
-  imports: [AsyncPipe, CartItemComponent, CartItemForm, OrderComponent, AddressPopup],
+  imports: [AsyncPipe, CartItemComponent, CartItemForm, OrderComponent, AddressPopup, OrderPopup],
   templateUrl: './cart.html',
   styleUrl: './cart.css',
 })
@@ -24,19 +25,34 @@ export class Cart {
     this.platformId = platformId
   }
 
-  popupVisible = signal(false)
-  addressId: number = 0
+  AddressPopupVisible = signal(false)
+  OrderPopupVisible = signal<string>('')
 
-  onClosePopup() {
-    this.popupVisible.set(false)
+  addressId: number = 0
+  billingAddressId: number = 0
+
+  onCloseAddressPopup() {
+    this.AddressPopupVisible.set(false)
   }
 
-  onOpenPopup() {
-    this.popupVisible.set(true)
+  onOpenAddressPopup() {
+    this.AddressPopupVisible.set(true)
+  }
+
+  onCloseOrderPopup() {
+    this.OrderPopupVisible.set('')
+  }
+
+  onOpenOrderPopup(id: number) {
+    this.OrderPopupVisible.set(String(id))
   }
 
   onSelection(value: string) {
     this.addressId = parseInt(value.valueOf())
+  }
+
+  onSelectionBilling(value: string) {
+    this.billingAddressId = parseInt(value.valueOf())
   }
 
   ngOnInit(): void {
@@ -44,4 +60,6 @@ export class Cart {
       this.store.dispatch(CartsPageActions.loadCartItems())
     }
   }
+
+  protected readonly String = String
 }

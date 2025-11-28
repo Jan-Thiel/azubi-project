@@ -8,7 +8,7 @@ import { CustomerService } from '../../service/customer.service'
   templateUrl: './email-change-popup.html',
   styleUrl: './email-change-popup.css',
 })
-export class EmailChangePopup{
+export class EmailChangePopup {
   customerService = inject(CustomerService)
 
   email: string | undefined

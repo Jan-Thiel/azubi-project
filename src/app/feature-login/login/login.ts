@@ -30,6 +30,6 @@ export class Login {
   login(): void {
     this.customerService.login(this.email, this.password)
     // User is routed to Vehicle List on login
-    this.router.navigate(['/'])
+    this.router.navigate(['/vehicles'])
   }
 }

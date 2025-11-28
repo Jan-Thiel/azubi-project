@@ -7,8 +7,6 @@ import { SsrCookieService } from 'ngx-cookie-service-ssr'
   providedIn: 'root',
 })
 export class OrderService {
-  cookieService = inject(SsrCookieService)
-
   constructor(private http: HttpClient) {}
 
   fetchOrdersApi() {
